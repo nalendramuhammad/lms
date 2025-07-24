@@ -3,7 +3,6 @@
     <AppHeader />
     <main>
       <router-view />
-      <!-- Komponen halaman ditampilkan di sini -->
     </main>
     <AppFooter />
   </div>

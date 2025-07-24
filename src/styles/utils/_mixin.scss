@@ -1,0 +1,23 @@
+// Contoh mixin responsif
+@mixin respond($breakpoint) {
+  @if $breakpoint == sm {
+    @media (max-width: 600px) {
+      @content;
+    }
+  } @else if $breakpoint == md {
+    @media (max-width: 900px) {
+      @content;
+    }
+  } @else if $breakpoint == lg {
+    @media (max-width: 1200px) {
+      @content;
+    }
+  }
+}
+
+// Contoh mixin center flex
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

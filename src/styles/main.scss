@@ -1,5 +1,7 @@
 @use "utils/variables";
 @use "utils/main";
+@use "utils/mixin";
+@use "utils/functions";
 
 @use "components/header";
 @use "components/footer";
