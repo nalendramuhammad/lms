@@ -2,17 +2,21 @@
   <div id="app">
     <AppHeader />
     <main>
-      <h2>Ini halaman utama</h2>
+      <router-view />
+      <!-- Komponen halaman ditampilkan di sini -->
     </main>
+    <AppFooter />
   </div>
 </template>
 
 <script>
 import AppHeader from "@/components/layout/Header.vue";
+import AppFooter from "@/components/layout/Footer.vue";
 
 export default {
   components: {
     AppHeader,
+    AppFooter,
   },
 };
 </script>
