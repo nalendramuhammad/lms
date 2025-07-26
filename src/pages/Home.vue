@@ -1,50 +1,45 @@
 <template>
   <section class="hero-carousel">
-    <div class="hero-carousel__slides">
-      <div
-        v-for="(slide, idx) in slides"
-        :key="idx"
-        class="hero-carousel__slide"
-        :class="{ 'is-active': idx === activeSlide }"
-      >
-        <div class="hero-carousel__content">
-          <div class="hero-carousel__text">
-            <div class="hero-carousel__brand">
-              <span>{{ slide.brand }}</span>
-              <span
-                v-if="slide.badge"
-                class="hero-carousel__badge"
-                >{{ slide.badge }}</span
-              >
-            </div>
-            <h1 class="hero-carousel__title">{{ slide.title }}</h1>
-            <p class="hero-carousel__desc">{{ slide.desc }}</p>
-            <div
-              class="hero-carousel__price"
-              v-if="slide.price"
-            >
-              <span
-                v-if="slide.oldPrice"
-                class="hero-carousel__old"
-                >{{ slide.oldPrice }}</span
-              >
-              <span class="hero-carousel__new">{{ slide.price }}</span>
-            </div>
-            <button class="hero-carousel__cta">{{ slide.cta }}</button>
-            <div
-              v-if="slide.subcta"
-              class="hero-carousel__subcta"
-              v-html="slide.subcta"
-            ></div>
-          </div>
-          <div class="hero-carousel__img-wrap">
-            <img
-              :src="slide.img"
-              :alt="slide.imgAlt"
-              class="hero-carousel__img"
-            />
-          </div>
+    <div class="hero-carousel__content">
+      <div class="hero-carousel__text">
+        <div class="hero-carousel__brand">
+          <span>{{ slides[activeSlide].brand }}</span>
+          <span
+            v-if="slides[activeSlide].badge"
+            class="hero-carousel__badge"
+            >{{ slides[activeSlide].badge }}</span
+          >
         </div>
+        <h1 class="hero-carousel__title">{{ slides[activeSlide].title }}</h1>
+        <p class="hero-carousel__desc">{{ slides[activeSlide].desc }}</p>
+        <div
+          class="hero-carousel__price"
+          v-if="slides[activeSlide].price"
+        >
+          <span
+            v-if="slides[activeSlide].oldPrice"
+            class="hero-carousel__old"
+            >{{ slides[activeSlide].oldPrice }}</span
+          >
+          <span class="hero-carousel__new">{{
+            slides[activeSlide].price
+          }}</span>
+        </div>
+        <button class="hero-carousel__cta">
+          {{ slides[activeSlide].cta }}
+        </button>
+        <div
+          v-if="slides[activeSlide].subcta"
+          class="hero-carousel__subcta"
+          v-html="slides[activeSlide].subcta"
+        ></div>
+      </div>
+      <div class="hero-carousel__img-wrap">
+        <img
+          :src="heroImg"
+          :alt="slides[activeSlide].imgAlt"
+          class="hero-carousel__img"
+        />
       </div>
     </div>
     <div class="hero-carousel__dots">
@@ -625,6 +620,8 @@
 </template>
 
 <script>
+import heroImg from "@/assets/icon.png";
+
 export default {
   name: "HomePage",
   data() {
@@ -641,7 +638,6 @@ export default {
           cta: "Start 7-day Free Trial",
           subcta:
             "or <b>Rp 4.999.000/year</b> with 14-day money-back guarantee",
-          img: "https://randomuser.me/api/portraits/men/32.jpg",
           imgAlt: "Promo 1",
         },
         {
@@ -654,7 +650,6 @@ export default {
           cta: "Upgrade Now",
           subcta:
             "or <b>Rp 7.999.000/year</b> with 14-day money-back guarantee",
-          img: "https://randomuser.me/api/portraits/women/44.jpg",
           imgAlt: "Promo 2",
         },
         {
@@ -666,11 +661,11 @@ export default {
           oldPrice: null,
           cta: "Get Started",
           subcta: "",
-          img: "https://randomuser.me/api/portraits/men/65.jpg",
           imgAlt: "Promo 3",
         },
       ],
       autoSlideInterval: null,
+      heroImg,
     };
   },
   methods: {

@@ -4,21 +4,17 @@
 
 .hero-carousel {
   position: relative;
-  overflow: hidden;
-  height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 8rem;
+  align-items: center;
+  padding: 6rem 8rem;
 
   &__slides {
     position: relative;
     display: block;
     align-items: stretch;
     overflow: hidden;
-    min-height: 400px;
-    max-height: 400px;
-    height: 400px;
   }
 
   &__slide {
@@ -43,24 +39,19 @@
 
   &__content {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #fff;
     border-radius: 2rem;
     gap: 2.5rem;
-    min-height: 400px;
-    max-height: 400px;
-    height: 400px;
+    // width: 100%;
+    box-sizing: border-box;
   }
 
   &__text {
-    flex: 1 1 0;
-    max-width: 50%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     gap: 1.2rem;
+    box-sizing: border-box;
   }
 
   &__brand {
@@ -88,7 +79,6 @@
     font-size: 2.5rem;
     font-weight: 800;
     color: #222;
-    margin: 0 0 0.5rem 0;
     line-height: 1.15;
   }
 
@@ -150,23 +140,32 @@
   }
 
   &__img-wrap {
-    flex: 0 0 320px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    min-width: 220px;
-    max-width: 340px;
-    height: 260px;
+    align-items: center;
+    justify-content: center;
     position: relative;
+    box-sizing: border-box;
+    overflow: visible;
+    max-width: 1000px;
+    width: 50%;
+    height: 520px;
+    background: #fff;
+    flex: none;
   }
-
   &__img {
+    display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    border-radius: 1.5rem;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-    background: #e6eefe;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  @media (max-width: 900px) {
+    &__img-wrap {
+      width: 98vw;
+      max-width: 99vw;
+      height: 320px;
+    }
   }
 
   &__nav {
@@ -204,7 +203,7 @@
     justify-content: center;
     gap: 0.7rem;
     position: absolute;
-    bottom: 0;
+    bottom: 1rem;
     left: 0;
     width: 100%;
     z-index: 10;
@@ -230,7 +229,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 6rem 8rem;
+  padding: 2rem 8rem;
 
   &__title {
     font-size: 2rem;
@@ -878,6 +877,8 @@
     &:hover {
       box-shadow: 0 6px 24px rgba(0, 0, 0, 0.13);
       border: 2px solid #ffe600;
+      transform: scale(1.07);
+      transition: transform 0.3s ease;
     }
   }
   &__icon {
