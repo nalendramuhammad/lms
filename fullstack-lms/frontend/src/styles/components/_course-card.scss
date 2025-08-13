@@ -1,0 +1,334 @@
+@use "sass:color";
+@use "../utils/mixins" as *;
+@use "../utils/functions" as *;
+@use "../utils/variables" as *;
+
+.course-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  // Disable hover effects when the no-hover modifier is present
+  &.no-hover {
+    transition: none;
+
+    &:hover {
+      transform: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .course-card__image:hover .course-overlay {
+      opacity: 0;
+    }
+  }
+
+  &__image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .course-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+
+      .edit-btn,
+      .delete-btn {
+        background: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+
+        .icon {
+          font-size: 1.2rem;
+        }
+      }
+
+      .delete-btn {
+        background: #ef4444;
+        color: white;
+      }
+    }
+
+    &:hover .course-overlay {
+      opacity: 1;
+    }
+
+    .featured-badge,
+    .free-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .featured-badge {
+      background: #fbbf24;
+      color: #92400e;
+    }
+
+    .free-badge {
+      background: #10b981;
+      color: white;
+    }
+  }
+
+  &__content {
+    padding: 1.5rem;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+  }
+
+  &__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    line-height: 1.3;
+    flex: 1;
+  }
+
+  &__status {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+
+    &.published {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    &.draft {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    &.archived {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+  }
+
+  &__description {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  &__price {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .free-text {
+      color: #10b981;
+      font-weight: 600;
+    }
+
+    .price {
+      color: #333;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .original-price {
+      color: #999;
+      text-decoration: line-through;
+      font-size: 0.9rem;
+    }
+  }
+
+  &__duration {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #666;
+    font-size: 0.9rem;
+
+    .icon {
+      font-size: 0.8rem;
+    }
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: #f8f9fa;
+    border-radius: 6px;
+  }
+
+  &__stat-item {
+    text-align: center;
+
+    .stat-label {
+      display: block;
+      font-size: 0.7rem;
+      color: #666;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-value {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #333;
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+
+    .tag {
+      background: #e5e7eb;
+      color: #374151;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 500;
+    }
+
+    .more-tags {
+      color: #666;
+      font-size: 0.7rem;
+      font-style: italic;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.5rem;
+
+    .btn {
+      flex: 1;
+      padding: 0.5rem;
+      font-size: 0.8rem;
+      border-radius: $border-radius-sm;
+      font-weight: $font-weight-semibold;
+      cursor: pointer;
+      transition:
+        background-color $transition-fast,
+        color $transition-fast,
+        box-shadow $transition-fast;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: $primary-color;
+      color: $white;
+
+      &:hover {
+        background: $primary-dark;
+      }
+    }
+
+    .btn-secondary {
+      background: $secondary-color;
+      color: $white;
+
+      &:hover {
+        background: color.scale($secondary-color, $lightness: -10%);
+      }
+    }
+
+    .btn-danger {
+      background: $danger-color;
+      color: $white;
+
+      &:hover {
+        background: color.scale($danger-color, $lightness: -10%);
+      }
+    }
+  }
+}
+
+// List view styles
+.courses-grid.list-view .course-card {
+  display: flex;
+  max-width: none;
+
+  &__image {
+    width: 220px;
+    height: 150px;
+    flex-shrink: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.25rem;
+  }
+
+  &__actions {
+    margin-top: auto;
+  }
+}

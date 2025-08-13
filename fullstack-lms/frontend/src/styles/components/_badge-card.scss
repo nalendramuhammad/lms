@@ -1,0 +1,302 @@
+@use "sass:color";
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+.badge-card {
+  @include card-base;
+  @include card-hover;
+  padding: $spacing-lg;
+
+  .badge-header {
+    @include flex-between;
+    margin-bottom: $spacing-lg;
+
+    .badge-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: $border-radius;
+      flex-shrink: 0;
+      margin-right: $spacing-md;
+      background: $primary-color;
+      @include flex-center;
+
+      .icon {
+        width: 32px;
+        height: 32px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: block;
+      }
+    }
+
+    .badge-meta {
+      flex: 1;
+
+      .badge-name {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-semibold;
+        color: $secondary-color;
+        margin: 0 0 $spacing-xs;
+        line-height: $line-height-snug;
+      }
+
+      .badge-category {
+        font-size: $font-size-sm;
+        color: $gray-600;
+        margin: 0 0 $spacing-sm;
+        font-weight: $font-weight-medium;
+      }
+
+      .badge-tags {
+        display: flex;
+        gap: $spacing-xs;
+        flex-wrap: wrap;
+
+        .tag {
+          font-size: 0.75rem;
+          padding: $spacing-xs $spacing-sm;
+          background: $primary-color;
+          color: $white;
+          border-radius: $border-radius-sm;
+          font-weight: $font-weight-medium;
+        }
+      }
+    }
+
+    .badge-actions {
+      display: flex;
+      gap: $spacing-xs;
+
+      .edit-btn,
+      .delete-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: $border-radius-sm;
+        border: none;
+        @include flex-center;
+        cursor: pointer;
+        transition: all $transition-normal;
+
+        .icon {
+          width: 16px;
+          height: 16px;
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+      }
+
+      .edit-btn {
+        background: $success-color;
+        color: $white;
+
+        &:hover {
+          background: color.adjust($success-color, $lightness: -10%);
+          transform: scale(1.05);
+        }
+
+        .edit-icon {
+          background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>');
+        }
+      }
+
+      .delete-btn {
+        background: $danger-color;
+        color: $white;
+
+        &:hover {
+          background: color.adjust($danger-color, $lightness: -10%);
+          transform: scale(1.05);
+        }
+
+        .delete-icon {
+          background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>');
+        }
+      }
+    }
+  }
+
+  .badge-content {
+    .badge-description {
+      font-size: $font-size-sm;
+      color: $gray-600;
+      margin: 0 0 $spacing-lg;
+      line-height: $line-height-normal;
+      @include text-truncate-multiline(3);
+    }
+
+    .badge-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: $spacing-md;
+      margin-bottom: $spacing-lg;
+
+      .detail-item {
+        @include flex-start;
+        gap: $spacing-sm;
+        font-size: $font-size-sm;
+        color: $gray-600;
+
+        .icon {
+          width: 16px;
+          height: 16px;
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+          flex-shrink: 0;
+        }
+
+        .requirement-icon {
+          background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="%236b7280" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>');
+        }
+
+        .points-icon {
+          background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="%236b7280" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>');
+        }
+
+        .rarity-icon {
+          background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="%236b7280" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/><circle cx="12" cy="12" r="4"/></svg>');
+        }
+
+        .users-icon {
+          background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="%236b7280" viewBox="0 0 24 24"><path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H17c-.8 0-1.54.37-2.01 1l-1.7 2.26V9H9V6c0-1.1.9-2 2-2h3c.55 0 1 .45 1 1v3h2v9h-2v-6h-2v6H8v-6H6v6H4v-8.47L4.5 14H7v6h13z"/></svg>');
+        }
+
+        .rarity-badge {
+          font-size: 0.75rem;
+          padding: $spacing-xs $spacing-sm;
+          border-radius: $border-radius-sm;
+          font-weight: $font-weight-medium;
+          text-transform: capitalize;
+
+          &.common {
+            background: $gray-200;
+            color: $gray-700;
+          }
+
+          &.rare {
+            background: $primary-color;
+            color: $white;
+          }
+
+          &.epic {
+            background: $purple-500;
+            color: $white;
+          }
+
+          &.legendary {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: $secondary-color;
+            font-weight: $font-weight-semibold;
+          }
+        }
+      }
+    }
+
+    .badge-footer {
+      @include flex-between;
+      align-items: center;
+      padding-top: $spacing-md;
+      border-top: 1px solid $gray-200;
+
+      .badge-status {
+        @include flex-start;
+        gap: $spacing-xs;
+        font-size: $font-size-sm;
+        color: $gray-500;
+
+        .icon {
+          width: 14px;
+          height: 14px;
+          background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="%239ca3af" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>');
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+      }
+
+      .badge-actions-footer {
+        display: flex;
+        gap: $spacing-sm;
+
+        .btn {
+          @include button-base;
+          padding: $spacing-sm $spacing-md;
+          font-size: $font-size-sm;
+
+          &.btn-primary {
+            @include button-variant($primary-color);
+          }
+
+          &.btn-secondary {
+            @include button-variant($gray-200, $secondary-color, $gray-300);
+            border: 1px solid $gray-300;
+          }
+        }
+      }
+    }
+  }
+
+  // Badge icon styles
+  .badge-icon {
+    .icon {
+      &.star-icon {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>');
+      }
+
+      &.trophy-icon {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5V7C21 7.55 20.55 8 20 8H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V8H4C3.45 8 3 7.55 3 7V5C3 4.45 3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 8V19H17V8H7Z"/></svg>');
+      }
+
+      &.medal-icon {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>');
+      }
+
+      &.crown-icon {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M12 8L15 13.2L18 10.5L17.3 14H6.7L6 10.5L9 13.2L12 8M12 4L8.5 10L3 5L5 16H19L21 5L15.5 10L12 4Z"/></svg>');
+      }
+
+      &.fire-icon {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M12 2C12 2 14 4 14 6C14 8 12 10 12 10C12 10 10 8 10 6C10 4 12 2 12 2Z"/><path d="M12 10C12 10 14 12 14 14C14 16 12 18 12 18C12 18 10 16 10 14C10 12 12 10 12 10Z"/><path d="M12 18C12 18 14 20 14 22C14 24 12 26 12 26C12 26 10 24 10 22C10 20 12 18 12 18Z"/></svg>');
+      }
+
+      &.heart-icon {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+      }
+
+      &.book-icon {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M21 4H3c-1.1 0-2 .9-2 2v13c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM3 19V6h8v13H3zm18 0h-8V6h8v13z"/></svg>');
+      }
+
+      &.users-icon {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H17c-.8 0-1.54.37-2.01 1l-1.7 2.26V9H9V6c0-1.1.9-2 2-2h3c.55 0 1 .45 1 1v3h2v9h-2v-6h-2v6H8v-6H6v6H4v-8.47L4.5 14H7v6h13z"/></svg>');
+      }
+
+      &.share-icon {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>');
+      }
+
+      // New icons for table badges
+      &.chart-icon {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>');
+      }
+
+      &.cloud-icon {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>');
+      }
+
+      &.globe-icon {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>');
+      }
+
+      &.target-icon {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>');
+      }
+
+      &.lightning-icon {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>');
+      }
+    }
+  }
+}

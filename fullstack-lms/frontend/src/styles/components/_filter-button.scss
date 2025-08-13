@@ -1,0 +1,37 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+.filter-button {
+  @include button-base;
+  @include button-variant($gray-100, $secondary-color, $gray-200);
+  border: 1px solid $gray-300;
+  gap: $spacing-sm;
+
+  .icon {
+    width: 16px;
+    height: 16px;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="%236b7280" viewBox="0 0 24 24"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &:hover {
+    background: $gray-200;
+    border-color: $gray-400;
+  }
+
+  &.active {
+    background: $primary-color;
+    color: $white;
+    border-color: $primary-color;
+
+    .icon {
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/></svg>');
+    }
+
+    &:hover {
+      background: $primary-dark;
+    }
+  }
+}

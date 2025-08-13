@@ -1,0 +1,74 @@
+// Import utilities
+@use "utils/variables" as *;
+@use "utils/mixins" as *;
+@use "utils/functions" as *;
+
+// Import components (header dan footer hanya untuk halaman non-CMS)
+@use "components/header" as *;
+@use "components/footer" as *;
+@use "components/course-card" as *;
+
+// Import pages (halaman non-CMS)
+@use "pages/home" as *;
+@use "pages/login" as *;
+@use "pages/analytics" as *;
+
+// Global styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  color: $secondary-color;
+  background-color: $light-gray;
+}
+
+// Utility classes
+.container {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+// Button utilities
+.btn {
+  @include button-base;
+
+  &.btn-primary {
+    @include button-variant($primary-color);
+  }
+
+  &.btn-secondary {
+    @include button-variant($gray-200, $secondary-color, $gray-300);
+    border: 1px solid $gray-300;
+  }
+
+  &.btn-success {
+    @include button-variant($success-color);
+  }
+
+  &.btn-danger {
+    @include button-variant($danger-color);
+  }
+
+  &.btn-warning {
+    @include button-variant($warning-color);
+  }
+}

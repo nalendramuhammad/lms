@@ -1,0 +1,207 @@
+@use "sass:color";
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+.job-card {
+  @include card-base;
+  @include card-hover;
+  padding: $spacing-lg;
+
+  .job-header {
+    @include flex-between;
+    margin-bottom: $spacing-lg;
+
+    .company-logo {
+      width: 60px;
+      height: 60px;
+      border-radius: $border-radius;
+      overflow: hidden;
+      flex-shrink: 0;
+      margin-right: $spacing-md;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .job-meta {
+      flex: 1;
+
+      .job-title {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-semibold;
+        color: $secondary-color;
+        margin: 0 0 $spacing-xs;
+        line-height: $line-height-snug;
+      }
+
+      .company-name {
+        font-size: $font-size-sm;
+        color: $gray-600;
+        margin: 0 0 $spacing-sm;
+        font-weight: $font-weight-medium;
+      }
+
+      .job-tags {
+        display: flex;
+        gap: $spacing-xs;
+        flex-wrap: wrap;
+
+        .tag {
+          font-size: 0.75rem;
+          padding: $spacing-xs $spacing-sm;
+          background: $primary-color;
+          color: $white;
+          border-radius: $border-radius-sm;
+          font-weight: $font-weight-medium;
+        }
+      }
+    }
+
+    .job-actions {
+      display: flex;
+      gap: $spacing-xs;
+
+      .edit-btn,
+      .delete-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: $border-radius-sm;
+        border: none;
+        @include flex-center;
+        cursor: pointer;
+        transition: all $transition-normal;
+
+        .icon {
+          width: 16px;
+          height: 16px;
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+      }
+
+      .edit-btn {
+        background: $success-color;
+        color: $white;
+
+        &:hover {
+          background: color.adjust($success-color, $lightness: -10%);
+          transform: scale(1.05);
+        }
+
+        .edit-icon {
+          background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>');
+        }
+      }
+
+      .delete-btn {
+        background: $danger-color;
+        color: $white;
+
+        &:hover {
+          background: color.adjust($danger-color, $lightness: -10%);
+          transform: scale(1.05);
+        }
+
+        .delete-icon {
+          background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>');
+        }
+      }
+    }
+  }
+
+  .job-content {
+    .job-description {
+      font-size: $font-size-sm;
+      color: $gray-600;
+      margin: 0 0 $spacing-lg;
+      line-height: $line-height-normal;
+      @include text-truncate-multiline(3);
+    }
+
+    .job-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: $spacing-md;
+      margin-bottom: $spacing-lg;
+
+      .detail-item {
+        @include flex-start;
+        gap: $spacing-sm;
+        font-size: $font-size-sm;
+        color: $gray-600;
+
+        .icon {
+          width: 16px;
+          height: 16px;
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+          flex-shrink: 0;
+        }
+
+        .location-icon {
+          background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="%236b7280" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>');
+        }
+
+        .salary-icon {
+          background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="%236b7280" viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>');
+        }
+
+        .type-icon {
+          background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="%236b7280" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>');
+        }
+
+        .experience-icon {
+          background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="%236b7280" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>');
+        }
+      }
+    }
+
+    .job-footer {
+      @include flex-between;
+      align-items: center;
+      padding-top: $spacing-md;
+      border-top: 1px solid $gray-200;
+
+      .posted-date {
+        @include flex-start;
+        gap: $spacing-xs;
+        font-size: $font-size-sm;
+        color: $gray-500;
+
+        .icon {
+          width: 14px;
+          height: 14px;
+          background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="%239ca3af" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>');
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+      }
+
+      .job-actions-footer {
+        display: flex;
+        gap: $spacing-sm;
+
+        .btn {
+          @include button-base;
+          padding: $spacing-sm $spacing-md;
+          font-size: $font-size-sm;
+
+          &.btn-primary {
+            @include button-variant($primary-color);
+          }
+
+          &.btn-secondary {
+            @include button-variant($gray-200, $secondary-color, $gray-300);
+            border: 1px solid $gray-300;
+          }
+        }
+      }
+    }
+  }
+}

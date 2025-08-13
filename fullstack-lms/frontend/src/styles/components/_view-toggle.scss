@@ -1,0 +1,52 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+.view-toggle {
+  display: flex;
+  background: $gray-100;
+  border-radius: $border-radius;
+  padding: $spacing-xs;
+  gap: $spacing-xs;
+
+  .toggle-btn {
+    @include button-base;
+    padding: $spacing-sm $spacing-md;
+    background: transparent;
+    color: $gray-600;
+    border: none;
+    border-radius: $border-radius-sm;
+    transition: all $transition-normal;
+
+    .icon {
+      width: 16px;
+      height: 16px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    &.grid-view .icon {
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="%236b7280" viewBox="0 0 24 24"><path d="M3 3v8h8V3H3zm6 6H5V5h4v4zm-6 4v8h8v-8H3zm6 6H5v-4h4v4zm4-16v8h8V3h-8zm6 6h-4V5h4v4zm-6 4v8h8v-8h-8zm6 6h-4v-4h4v4z"/></svg>');
+    }
+
+    &.list-view .icon {
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="%236b7280" viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>');
+    }
+
+    &:hover {
+      background: $gray-200;
+      color: $secondary-color;
+    }
+
+    &.active {
+      background: $white;
+      color: $primary-color;
+      box-shadow: $shadow-sm;
+
+      .icon {
+        filter: brightness(0) saturate(100%) invert(27%) sepia(51%)
+          saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
+      }
+    }
+  }
+}

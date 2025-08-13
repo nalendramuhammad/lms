@@ -1,0 +1,969 @@
+@use "@/styles/utils/variables" as *;
+@use "@/styles/utils/mixins" as *;
+@use "@/styles/utils/functions" as *;
+
+// Analytics Dashboard Container
+.analytics-dashboard {
+  padding: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+// Header Actions
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  .date-range-select {
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    background: white;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.2s;
+
+    &:hover {
+      border-color: #9ca3af;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+  }
+
+  .export-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+
+    &:hover {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// Loading & Error States
+.loading-state,
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem;
+  text-align: center;
+  min-height: 400px;
+
+  .loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #e5e7eb;
+    border-top: 4px solid #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1.5rem;
+  }
+
+  .error-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  h3 {
+    margin-bottom: 0.75rem;
+    color: #374151;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  p {
+    color: #6b7280;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    max-width: 400px;
+    line-height: 1.5;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+
+    &:hover {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+    }
+  }
+}
+
+// Metrics Row
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.metric-card {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 1.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .metric-icon {
+    font-size: 2.5rem;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    border-radius: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .metric-content {
+    flex: 1;
+    min-width: 0; // Prevent text overflow
+
+    .metric-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #111827;
+      margin: 0 0 0.5rem 0;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .metric-label {
+      color: #6b7280;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin: 0 0 0.75rem 0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .metric-growth {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.375rem 0.75rem;
+      border-radius: 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+
+      &::before {
+        content: "↗";
+        font-size: 0.875rem;
+      }
+
+      &.positive {
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      &.negative {
+        background: #fef2f2;
+        color: #dc2626;
+
+        &::before {
+          content: "↘";
+        }
+      }
+    }
+  }
+}
+
+// Charts Row
+.charts-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.chart-card {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 1.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #f3f4f6;
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #111827;
+      margin: 0;
+    }
+
+    .chart-actions {
+      display: flex;
+      gap: 0.5rem;
+
+      .chart-btn {
+        padding: 0.5rem 1rem;
+        border: 1px solid #d1d5db;
+        background: white;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &.active {
+          background: #3b82f6;
+          color: white;
+          border-color: #3b82f6;
+        }
+
+        &:hover:not(.active) {
+          background: #f9fafb;
+          border-color: #9ca3af;
+        }
+      }
+    }
+  }
+
+  .chart-container {
+    height: 320px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+}
+
+// Revenue Chart
+.revenue-chart {
+  display: flex;
+  align-items: end;
+  justify-content: space-around;
+  height: 100%;
+  padding: 1.5rem 0;
+  width: 100%;
+
+  .chart-bar {
+    width: 70px;
+    background: linear-gradient(180deg, #8b5cf6 0%, #7c3aed 100%);
+    border-radius: 0.5rem 0.5rem 0 0;
+    position: relative;
+    min-height: 30px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(139, 92, 246, 0.2);
+
+    &:hover {
+      transform: scaleY(1.05);
+      box-shadow: 0 4px 8px rgba(139, 92, 246, 0.3);
+    }
+
+    .bar-value {
+      position: absolute;
+      top: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #374151;
+      white-space: nowrap;
+      background: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .bar-label {
+      position: absolute;
+      bottom: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  }
+}
+
+// Pie Chart
+.pie-chart {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  gap: 2rem;
+
+  .pie-visual {
+    width: min(260px, 100%);
+    height: auto;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.08),
+      inset 0 2px 6px rgba(255, 255, 255, 0.4);
+    border: 6px solid #ffffff;
+  }
+
+  .pie-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 280px;
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.625rem 0.75rem;
+      background: #f9fafb;
+      border-radius: 0.5rem;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+
+      &:hover {
+        transform: translateX(4px);
+        background: #f3f4f6;
+        border-color: #e5e7eb;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .legend-color {
+        width: 16px;
+        height: 16px;
+        border-radius: 3px;
+        flex-shrink: 0;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .legend-text {
+        flex: 1;
+        min-width: 0;
+
+        .legend-label {
+          font-size: 0.8125rem;
+          font-weight: 600;
+          color: #111827;
+          margin-bottom: 0.125rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          line-height: 1.2;
+        }
+
+        .legend-value {
+          font-size: 0.6875rem;
+          font-weight: 500;
+          color: #6b7280;
+          line-height: 1.2;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .pie-chart {
+    flex-direction: column;
+    gap: 1rem;
+
+    .pie-visual {
+      width: min(200px, 80vw);
+      height: auto;
+      aspect-ratio: 1 / 1;
+      border-width: 4px;
+    }
+  }
+}
+
+// Tables Row
+.tables-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.table-card {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 1.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .table-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #f3f4f6;
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #111827;
+      margin: 0;
+    }
+  }
+}
+
+// Analytics Table
+.analytics-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 1rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  th {
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding-bottom: 0.75rem;
+  }
+
+  td {
+    color: #6b7280;
+    font-size: 0.875rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  tr:hover {
+    background-color: #f9fafb;
+  }
+
+  .course-name,
+  .country-name {
+    font-weight: 600;
+    color: #111827;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .stars {
+      color: #fbbf24;
+      font-size: 0.875rem;
+    }
+
+    .rating-value {
+      font-weight: 600;
+      color: #111827;
+      font-size: 0.875rem;
+    }
+  }
+
+  .percentage-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 120px;
+
+    .bar-fill {
+      height: 10px;
+      background: linear-gradient(90deg, #3b82f6 0%, #1d4ed8 100%);
+      border-radius: 5px;
+      min-width: 10px;
+      transition: width 0.3s ease;
+    }
+
+    .percentage-text {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #111827;
+      min-width: 35px;
+    }
+  }
+}
+
+// Activity Chart
+.activity-chart {
+  height: 100%;
+  position: relative;
+  border-bottom: 2px solid #e5e7eb;
+  border-left: 2px solid #e5e7eb;
+  padding: 1.5rem 1rem 3rem 1rem;
+  background: linear-gradient(
+    to top,
+    rgba(59, 130, 246, 0.02) 0%,
+    transparent 100%
+  );
+
+  .activity-point {
+    position: absolute;
+    bottom: 0;
+    width: 8px;
+    background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+    cursor: pointer;
+
+    &:hover {
+      transform: scaleY(1.3);
+      box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+      z-index: 10;
+    }
+
+    &::after {
+      content: attr(data-value);
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #111827;
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      white-space: nowrap;
+      z-index: 20;
+    }
+
+    &:hover::after {
+      opacity: 1;
+    }
+  }
+
+  .time-labels {
+    position: absolute;
+    bottom: -2.5rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #6b7280;
+    padding: 0 1rem;
+  }
+
+  .y-axis-labels {
+    position: absolute;
+    left: -2rem;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #9ca3af;
+    font-weight: 500;
+  }
+}
+
+// Device Chart
+.device-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  height: 100%;
+  justify-content: center;
+  padding: 1.5rem;
+
+  .device-bar {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 0.5rem 0;
+
+    .device-label {
+      width: 90px;
+      font-size: 0.8125rem;
+      color: #374151;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+    }
+
+    .device-bar-container {
+      flex: 1;
+      height: 20px;
+      background: #f3f4f6;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e5e7eb;
+
+      .device-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #3b82f6 0%, #1d4ed8 100%);
+        border-radius: 10px;
+        transition: width 0.8s ease;
+        box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.2) 50%,
+            transparent 100%
+          );
+          animation: shimmer 2s infinite;
+        }
+      }
+
+      .device-percentage {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: white;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        z-index: 2;
+      }
+    }
+
+    &:hover {
+      .device-bar-container {
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+
+        .device-bar-fill {
+          box-shadow: 0 3px 6px rgba(59, 130, 246, 0.4);
+        }
+      }
+    }
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+// Animations
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Responsive Design
+@media (max-width: 1200px) {
+  .charts-row,
+  .tables-row {
+    grid-template-columns: 1fr;
+  }
+
+  .metrics-row {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .analytics-dashboard {
+    padding: 1rem;
+  }
+
+  .metrics-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .metric-card {
+    padding: 1.25rem;
+
+    .metric-icon {
+      width: 60px;
+      height: 60px;
+      font-size: 2rem;
+    }
+
+    .metric-content .metric-value {
+      font-size: 1.75rem;
+    }
+  }
+
+  .chart-card,
+  .table-card {
+    padding: 1.25rem;
+  }
+
+  .chart-container {
+    height: 250px;
+    overflow: hidden;
+  }
+
+  .pie-chart {
+    padding: 0.75rem;
+
+    .pie-legend {
+      max-width: 250px;
+      gap: 0.5rem;
+
+      .legend-item {
+        padding: 0.5rem 0.625rem;
+        gap: 0.5rem;
+
+        .legend-color {
+          width: 14px;
+          height: 14px;
+        }
+
+        .legend-text {
+          .legend-label {
+            font-size: 0.75rem;
+          }
+
+          .legend-value {
+            font-size: 0.625rem;
+          }
+        }
+      }
+    }
+  }
+
+  .revenue-chart .chart-bar {
+    width: 50px;
+  }
+
+  .activity-chart {
+    padding: 1rem 0.75rem 2.5rem 0.75rem;
+
+    .activity-point {
+      width: 6px;
+    }
+
+    .time-labels {
+      bottom: -2rem;
+      font-size: 0.75rem;
+      padding: 0 0.75rem;
+    }
+  }
+
+  .device-chart {
+    padding: 1rem;
+    gap: 1rem;
+
+    .device-bar {
+      gap: 1rem;
+
+      .device-label {
+        width: 80px;
+        font-size: 0.75rem;
+      }
+
+      .device-bar-container {
+        height: 18px;
+
+        .device-percentage {
+          font-size: 0.6875rem;
+          right: 6px;
+        }
+      }
+    }
+  }
+
+  .analytics-table {
+    th,
+    td {
+      padding: 0.75rem 0.5rem;
+      font-size: 0.75rem;
+    }
+
+    .course-name,
+    .country-name {
+      max-width: 150px;
+    }
+
+    .percentage-bar {
+      width: 100px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .header-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+
+    .date-range-select,
+    .export-btn {
+      width: 100%;
+    }
+  }
+
+  .metric-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+
+    .metric-content {
+      .metric-value {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .chart-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .pie-chart {
+    padding: 0.5rem;
+
+    .pie-legend {
+      max-width: 200px;
+      gap: 0.375rem;
+
+      .legend-item {
+        padding: 0.375rem 0.5rem;
+        gap: 0.375rem;
+
+        .legend-color {
+          width: 12px;
+          height: 12px;
+        }
+
+        .legend-text {
+          .legend-label {
+            font-size: 0.6875rem;
+          }
+
+          .legend-value {
+            font-size: 0.5625rem;
+          }
+        }
+      }
+    }
+  }
+
+  .activity-chart {
+    padding: 0.75rem 0.5rem 2rem 0.5rem;
+
+    .activity-point {
+      width: 5px;
+    }
+
+    .time-labels {
+      bottom: -1.75rem;
+      font-size: 0.6875rem;
+      padding: 0 0.5rem;
+    }
+  }
+
+  .device-chart {
+    padding: 0.75rem;
+    gap: 0.75rem;
+
+    .device-bar {
+      gap: 0.75rem;
+
+      .device-label {
+        width: 70px;
+        font-size: 0.6875rem;
+      }
+
+      .device-bar-container {
+        height: 16px;
+
+        .device-percentage {
+          font-size: 0.625rem;
+          right: 4px;
+        }
+      }
+    }
+  }
+}

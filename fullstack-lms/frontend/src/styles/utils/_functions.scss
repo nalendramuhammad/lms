@@ -1,0 +1,24 @@
+// Fungsi mengubah px ke rem
+@function px-to-rem($px, $base: 16) {
+  @return ($px / $base) * 1rem;
+}
+
+// Fungsi untuk menghitung spacing
+@function spacing($multiplier) {
+  @return $multiplier * 0.25rem;
+}
+
+// Fungsi untuk menghitung border radius
+@function border-radius($size) {
+  @if $size == sm {
+    @return 4px;
+  } @else if $size == md {
+    @return 8px;
+  } @else if $size == lg {
+    @return 12px;
+  } @else if $size == xl {
+    @return 16px;
+  } @else {
+    @return $size;
+  }
+}
